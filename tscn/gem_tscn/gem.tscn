@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://tscn/gem_tscn/gem.gd" type="Script" id=1]
+[ext_resource path="res://gem/gem-01.png" type="Texture" id=2]
+[ext_resource path="res://gem/gem-02.png" type="Texture" id=3]
+[ext_resource path="res://gem/gem-03.png" type="Texture" id=4]
+[ext_resource path="res://gem/gem-04.png" type="Texture" id=5]
+[ext_resource path="res://gem/gem-05.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 20.242
+
+[node name="gem" type="Area2D" groups=[
+"gem",
+]]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2.5, 2.5 )
+frames = SubResource( 1 )
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.951309, 0 )
+shape = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="area_entered" from="." to="." method="_on_gem_area_entered"]
